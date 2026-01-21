@@ -1,4 +1,4 @@
-function Footer() {
+export default function Footer() {
     return (
         <footer className="py-8 bg-[--bg-light] border-t border-custom text-center text-[--text-secondary] text-sm shadow-custom">
             <div className="container mx-auto">
@@ -8,5 +8,3 @@ function Footer() {
         </footer>
     );
 }
-
-export default Footer;
