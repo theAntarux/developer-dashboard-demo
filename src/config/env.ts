@@ -1,8 +1,4 @@
-import dotenv from "dotenv";
-
-dotenv.config();
-
-export const POSITION_TOKEN = process.env.POSITION_TOKEN;
+export const POSITION_TOKEN = import.meta.env.VITE_POSITION_TOKEN;
 
 if (!POSITION_TOKEN) {
     throw new Error("POSITION_TOKEN is not defined in enviroment variables.");
