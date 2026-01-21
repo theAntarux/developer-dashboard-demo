@@ -1,1 +1,51 @@
-@reference "tailwindcss";
+@tailwind utilities;
+
+:root {
+  --bg-dark: #121826;
+  --bg-light: #1a2234;
+  --accent-blue: #3b82f6;
+  --accent-blue-light: #60a5fa;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --border-color: #374151;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+  }
+
+  h1, h2 {
+    font-weight: bold;
+    color: var(--text-primary);
+  }
+
+  button {
+    transition: all 0.2s ease;
+  }
+  
+  .btn-accent {
+    background-color: var(--accent-blue);
+    color: var(--text-primary);
+  }
+
+  .btn-accent:hover {
+    background-color: var(--accent-blue-light);
+  }
+
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+
+  .border-custom {
+    border-color: var(--border-color);
+  }
+
+  .shadow-custom {
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+  }
+}
