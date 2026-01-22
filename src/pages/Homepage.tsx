@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { plrPositionStore } from "@/stores/plrPositionsStore";
 import { useFetchPositions } from "@/hooks/useFetchPositions";
+import MapModal  from "@/components/ui/MapModal";
 
 export default function Homepage() {
     useFetchPositions(); // Just a plain call upon render
@@ -23,7 +24,7 @@ export default function Homepage() {
     }
 
     return (
-        <div className="flex h-[calc(100vh-8rem)] bg-[--bg-dark]">
+        <div className="flex h-[calc(100vh-6rem)] bg-[--bg-dark]">
             <aside className="w-64 bg-[--bg-light] border-r border-custom overflow-y-auto p-4 space-y-2 shadow-custom">
                 <button
                     className={`
@@ -62,7 +63,44 @@ export default function Homepage() {
                 ))}
             </aside>
             <main className="flex-1 p-6 overflow-y-auto bg-[--bg-dark]">
+                <h2 className="text-xl mb-4 text-[--text-primary]">
+                    {selectedServer === "all" ? "All Servers Overview" : `Server ${selectedServer} Details`}
+                </h2>
 
+                {selectedServer === "all" ? (
+                    <p className="text-[--text-secondary] mb-6">
+                        Total servers: {serverIds.length} | Total players: {allPlayers.length}
+                    </p>
+                ) : (
+                    <p className="text-[--text-secondary] mb-6">
+                        Players online: {selectedPlayers.length || "None - quiet night"}
+                    </p>
+                )}
+
+                <div className="space-y-2 mb-6">
+                    {selectedPlayers.length > 0 ? (
+                        selectedPlayers.map((player) => (
+                            <p key={player.userId} className="text-[--text-secondary] bg-[--bg-light] p-3 rounded-lg border border-custom">
+                                User ID: {player.userId}
+                            </p>
+                        ))
+                    ) : (
+                        <p className="text-[--text-secondary] italic">No players online - basically a ghost town vibes.</p>
+                    )}
+                </div>
+                <button
+                    className="btn-accent py-3 px-6 rounded-lg font-semibold hover:btn-accent text-[--text-primary]"
+                    onClick={() => setIsMapOpen(true)}
+                >
+                Open Live Map
+                </button>
+
+                {isMapOpen && (
+                    <MapModal
+                        serverId={selectedServer}
+                        onCloseCallback={() => setIsMapOpen(false)}
+                    />
+                )}
             </main>
         </div>
     );
